@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: conversao_temperatura
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: conversao_temperatura
+  template:
+    metadata:
+      labels:
+        app: conversao_temperatura
+    spec:
+      containers:
+      - name: conversao_temperatura
+        image: aron1525/conversao_temperatura:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: conversao_temperatura
+spec:
+  selector:
+    app: conversao_temperatura
+  ports:
+  - port: 80
+    targetPort: 8080
+
